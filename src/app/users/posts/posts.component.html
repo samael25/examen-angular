@@ -1,0 +1,56 @@
+<div fxLayout="column" fxLayoutAlign="space-between none" style="height: 100%;">
+  <div fxLayout="row" fxLayoutAlign="center none">
+
+      <mat-card fxFlex="98">
+          <mat-card-header fxLayout="column">
+              <mat-card-title>Posts</mat-card-title>
+              <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between enter">
+                  <form [formGroup]="formUser" (ngSubmit)="getPostsByUserId()">
+                      <mat-form-field floatLabel="always" appearance="outline">
+                          <mat-label>Id Usuario</mat-label>
+                          <input matInput formControlName="id" type="number" placeholder="Id de Usuario">
+                          <!-- <mat-error>
+                              <mat-error-message [control]="form.id" nomCampo="IdUsuario"></mat-error-message>
+                          </mat-error> -->
+                      </mat-form-field>
+                  </form>
+                  <mat-chip-list>
+                      <mat-chip mat-button type="submit" color="primary" (click)="getPostsByUserId()" selected>Buscar</mat-chip>
+                  </mat-chip-list>
+              </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-table [dataSource]="dataSource" matSort>
+
+                  <!-- Titulo Definition -->
+                  <ng-container matColumnDef="title">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Titulo Definition -->
+                  <ng-container matColumnDef="body">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Cuerpo </mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row.body}} </mat-cell>
+                  </ng-container>
+
+                  <!-- detail Definition -->
+                  <ng-container matColumnDef="detail">
+                      <mat-header-cell *matHeaderCellDef> Detalle </mat-header-cell>
+                      <mat-cell *matCellDef="let row">
+                          <button mat-icon-button matTooltip="Detalle Usuario" (click)="detailPost(row)">
+                              <mat-icon>message</mat-icon>
+                          </button>
+                      </mat-cell>
+                  </ng-container>
+
+                  <!-- Header and Row Declarations -->
+                  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </mat-card-content>
+      </mat-card>
+  </div>
+</div>

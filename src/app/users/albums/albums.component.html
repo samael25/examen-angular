@@ -1,0 +1,40 @@
+<div fxLayout="column" fxLayoutAlign="space-between none" style="height: 100%;">
+  <div fxLayout="row" fxLayoutAlign="center none">
+
+      <mat-card fxFlex="98">
+          <mat-card-header fxLayout="column">
+              <mat-card-title>Albums</mat-card-title>
+              <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between enter">
+                  <form [formGroup]="formUser" (ngSubmit)="getAlbumsByUserId()">
+                      <mat-form-field floatLabel="always" appearance="outline">
+                          <mat-label>Id Usuario</mat-label>
+                          <input matInput formControlName="id" type="number" placeholder="Id de Usuario">
+                          <!-- <mat-error>
+                              <mat-error-message [control]="form.id" nomCampo="IdUsuario"></mat-error-message>
+                          </mat-error> -->
+                      </mat-form-field>
+                  </form>
+                  <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" type="submit" color="primary" (click)="getAlbumsByUserId()" selected>
+                    <mat-icon>search</mat-icon>
+                  </button>
+              </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+              <mat-table [dataSource]="dataSource" matSort>
+
+                  <!-- Titulo Definition -->
+                  <ng-container matColumnDef="title">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </mat-header-cell>
+                      <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Header and Row Declarations -->
+                  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </mat-card-content>
+      </mat-card>
+  </div>
+</div>

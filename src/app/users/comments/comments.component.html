@@ -1,0 +1,15 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle> comment</h1>
+<mat-dialog-content fxLayout="row" fxLayoutAlign="center stretch" fxLayoutGap="10px">
+    <mat-card *ngFor="let comment of comments$ | async">
+        <mat-card-title>{{comment.name}}</mat-card-title>
+        <mat-card-subtitle>{{comment.email}}</mat-card-subtitle>
+        <mat-card-content>
+            <p>{{comment.body}}</p>
+        </mat-card-content>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions style="justify-content: flex-end;">
+    <mat-chip-list>
+        <mat-chip mat-button color="accent" (click)="onClose()" selected>Cerrar</mat-chip>
+    </mat-chip-list>
+</mat-dialog-actions>
